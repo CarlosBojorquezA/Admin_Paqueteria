@@ -1,0 +1,157 @@
+<div class="container">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="#home">Inicio ></a><span>Estadísticas de Envíos</span>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>📊 Estadísticas de Envíos</h1>
+    <p>Análisis completo de rendimiento logístico en tiempo real</p>
+  </div>
+
+  <!-- Filters Container -->
+  <div class="filters-container">
+    <div class="filters-row">
+      <!-- Time Filters -->
+      <div class="filters">
+        <button 
+          class="filter-btn" 
+          [class.active]="currentTimeframe === 'week'"
+          (click)="changeTimeframe('week')">
+          Esta Semana
+        </button>
+        <button 
+          class="filter-btn" 
+          [class.active]="currentTimeframe === 'month'"
+          (click)="changeTimeframe('month')">
+          Este Mes
+        </button>
+        <button 
+          class="filter-btn" 
+          [class.active]="currentTimeframe === 'quarter'"
+          (click)="changeTimeframe('quarter')">
+          Trimestre
+        </button>
+        <button 
+          class="filter-btn" 
+          [class.active]="currentTimeframe === 'year'"
+          (click)="changeTimeframe('year')">
+          Año Actual
+        </button>
+      </div>
+
+      <!-- Package Type Filter -->
+      <div class="package-filter">
+        <label for="packageType">Tipo de Paquete:</label>
+        <select 
+          id="packageType" 
+          [(ngModel)]="currentPackageType"
+          (change)="changePackageType(currentPackageType)">
+          <option value="general">General (Todos)</option>
+          <option value="fragil">Frágil</option>
+          <option value="sobres">Sobres</option>
+          <option value="grande">Grande</option>
+          <option value="pequeno">Pequeño</option>
+          <option value="estandar">Estándar</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">📦</div>
+      <div class="stat-number">{{ stats.totalShipments }}</div>
+      <div class="stat-label">Envíos Totales</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-number">{{ stats.totalRevenue }}</div>
+      <div class="stat-label">Ingresos Totales</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">⏱️</div>
+      <div class="stat-number">{{ stats.avgDeliveryTime }}</div>
+      <div class="stat-label">Días Promedio</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">✅</div>
+      <div class="stat-number">{{ stats.successRate }}</div>
+      <div class="stat-label">Tasa de Éxito</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📈</div>
+      <div class="stat-number">{{ stats.avgPerDay }}</div>
+      <div class="stat-label">Promedio Diario</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">💵</div>
+      <div class="stat-number">{{ stats.avgPrice }}</div>
+      <div class="stat-label">Precio Promedio</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-grid">
+    <div class="chart-container">
+      <div class="chart-title">📈 Envíos por Período</div>
+      <div class="chart-wrapper">
+        <canvas #shipmentsChart></canvas>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-title">🎯 Estado de Envíos</div>
+      <div class="chart-wrapper">
+        <canvas #statusChart></canvas>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-title">📦 Tipos de Paquetes</div>
+      <div class="chart-wrapper">
+        <canvas #packageTypesChart></canvas>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-title">💰 Ingresos por Período</div>
+      <div class="chart-wrapper">
+        <canvas #revenueChart></canvas>
+      </div>
+    </div>
+
+    <div class="chart-container wide-chart">
+      <div class="chart-title">📊 Tendencia Mensual de Envíos</div>
+      <div class="chart-wrapper">
+        <canvas #trendChart></canvas>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-title">🚚 Métodos de Envío</div>
+      <div class="chart-wrapper">
+        <canvas #methodChart></canvas>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-title">🌍 Envíos por Región - Sinaloa</div>
+      <div class="chart-wrapper">
+        <canvas #regionChart></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button class="action-btn export-btn" (click)="exportData()">
+      <span>📊</span> Exportar Datos
+    </button>
+    <button class="action-btn print-btn" (click)="printReport()">
+      <span>🖨️</span> Imprimir Reporte
+    </button>
+  </div>
+</div>

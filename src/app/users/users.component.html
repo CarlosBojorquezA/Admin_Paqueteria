@@ -1,0 +1,76 @@
+<div class="container">
+  <header>
+    <h1>Gestión de Usuarios</h1>
+    <button (click)="goBack()" class="btn-back">← Volver</button>
+  </header>
+
+  <div class="tabs">
+    <button 
+      (click)="setActiveTab('consultar')" 
+      [class.active]="activeTab === 'consultar'"
+      class="tab-btn">
+      Consultar Usuario
+    </button>
+    <button 
+      (click)="setActiveTab('modificar')" 
+      [class.active]="activeTab === 'modificar'"
+      class="tab-btn">
+      Modificar Usuario
+    </button>
+    <button 
+      (click)="setActiveTab('eliminar')" 
+      [class.active]="activeTab === 'eliminar'"
+      class="tab-btn">
+      Eliminar Usuario
+    </button>
+  </div>
+
+  <div class="message" *ngIf="message" [class.error]="messageType === 'error'" [class.success]="messageType === 'success'">
+    {{ message }}
+  </div>
+
+  <!-- Tab Consultar -->
+  <div *ngIf="activeTab === 'consultar'" class="tab-content">
+    <h2>Consultar Usuario</h2>
+    <div class="form-group">
+      <label>Usuario:</label>
+      <input type="text" [(ngModel)]="consultaUsuario" class="form-control">
+    </div>
+    <button (click)="consultarUsuario()" class="btn-primary">Consultar</button>
+    
+    <div *ngIf="userInfo" class="user-card">
+      <h3>Información del Usuario</h3>
+      <p><strong>Usuario:</strong> {{ userInfo.usuario }}</p>
+      <p><strong>Nombre:</strong> {{ userInfo.nombre }}</p>
+      <p><strong>Rol:</strong> {{ userInfo.rol }}</p>
+    </div>
+  </div>
+
+  <!-- Tab Modificar -->
+  <div *ngIf="activeTab === 'modificar'" class="tab-content">
+    <h2>Modificar Usuario</h2>
+    <div class="form-group">
+      <label>Usuario:</label>
+      <input type="text" [(ngModel)]="modificarUsuario" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Nuevo Nombre:</label>
+      <input type="text" [(ngModel)]="modificarNombre" class="form-control">
+    </div>
+    <div class="form-group">
+      <label>Nuevo Rol:</label>
+      <input type="text" [(ngModel)]="modificarRol" class="form-control">
+    </div>
+    <button (click)="modificarUsuarioAction()" class="btn-primary">Modificar</button>
+  </div>
+
+  <!-- Tab Eliminar -->
+  <div *ngIf="activeTab === 'eliminar'" class="tab-content">
+    <h2>Eliminar Usuario</h2>
+    <div class="form-group">
+      <label>Usuario:</label>
+      <input type="text" [(ngModel)]="eliminarUsuario" class="form-control">
+    </div>
+    <button (click)="eliminarUsuarioAction()" class="btn-danger">Eliminar</button>
+  </div>
+</div>

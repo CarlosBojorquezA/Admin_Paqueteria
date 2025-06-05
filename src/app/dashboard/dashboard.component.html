@@ -1,0 +1,28 @@
+<div class="dashboard">
+  <header>
+    <h1>Gestión de Paquetería</h1>
+    <div class="user-info">
+      <span>Bienvenido, {{ currentUser?.nombre }}</span>
+      <button (click)="logout()" class="btn-logout">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    <div class="menu-cards">
+      <div class="card" (click)="navigateTo('/users')">
+        <h3>👤 Gestión de Usuarios</h3>
+        <p>Consultar, modificar y eliminar usuarios</p>
+      </div>
+
+      <div class="card" (click)="navigateTo('/packages')">
+        <h3>📦 Gestión de Paquetes</h3>
+        <p>Actualizar ubicación y estado de envíos</p>
+      </div>
+
+      <div class="card" (click)="navigateTo('/estadisticas')">
+        <h3>📊 Estadísticas</h3>
+        <p>Ver reportes y análisis de envíos</p>
+      </div>
+    </div>
+  </main>
+</div>

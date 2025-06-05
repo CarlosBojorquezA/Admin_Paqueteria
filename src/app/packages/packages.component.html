@@ -1,0 +1,56 @@
+<div class="container">
+  <header>
+    <h1>Gestión de Paquetes</h1>
+    <button (click)="goBack()" class="btn-back">← Volver</button>
+  </header>
+
+  <div class="tabs">
+    <button 
+      (click)="setActiveTab('ubicacion')" 
+      [class.active]="activeTab === 'ubicacion'"
+      class="tab-btn">
+      Actualizar Ubicación
+    </button>
+    <button 
+      (click)="setActiveTab('estado')" 
+      [class.active]="activeTab === 'estado'"
+      class="tab-btn">
+      Cambiar Estado
+    </button>
+  </div>
+
+  <div class="message" *ngIf="message" [class.error]="messageType === 'error'" [class.success]="messageType === 'success'">
+    {{ message }}
+  </div>
+
+  <!-- Tab Ubicación -->
+  <div *ngIf="activeTab === 'ubicacion'" class="tab-content">
+    <h2>Actualizar Ubicación del Paquete</h2>
+    <div class="form-group">
+      <label>Código de Rastreo:</label>
+      <input type="text" [(ngModel)]="codigoRastreo" class="form-control" placeholder="Ingrese el código de rastreo">
+    </div>
+    <div class="form-group">
+      <label>Nueva Ubicación:</label>
+      <input type="text" [(ngModel)]="nuevaUbicacion" class="form-control" placeholder="Ingrese la nueva ubicación">
+    </div>
+    <button (click)="actualizarUbicacion()" class="btn-primary">Actualizar Ubicación</button>
+  </div>
+
+  <!-- Tab Estado -->
+  <div *ngIf="activeTab === 'estado'" class="tab-content">
+    <h2>Cambiar Estado del Paquete</h2>
+    <div class="form-group">
+      <label>ID de Envío:</label>
+      <input type="number" [(ngModel)]="idEnvio" class="form-control" placeholder="Ingrese el ID del envío">
+    </div>
+    <div class="form-group">
+      <label>Nuevo Estado:</label>
+      <select [(ngModel)]="nuevoEstado" class="form-control">
+        <option value="">Seleccione un estado</option>
+        <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+      </select>
+    </div>
+    <button (click)="cambiarEstado()" class="btn-primary">Cambiar Estado</button>
+  </div>
+</div>
